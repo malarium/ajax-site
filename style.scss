@@ -122,10 +122,9 @@ header {
    color: #39000A;
 }
 
-.result-box p:before {
-  content: "> ";
-  font-weight: bold;
-}
 footer {
   margin-top: 50px;
+}
+#miasto {
+  cursor: pointer;
 }
