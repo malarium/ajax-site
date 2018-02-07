@@ -10,9 +10,9 @@ fetch(endpoint) // pobiera dane z adresu
 function findMatches(wordToMatch, cities) { //funkcja pobiera to co wprowadził user i całą kolekcj w zmiennej cities
   return cities.filter(place => { //filtruje przez wszystkie obiekty w cities i każdy przypisuje do zmiennej place
     const regex = new RegExp(wordToMatch, 'gi');//global, insensitive
-    return place.city.match(regex)/*i sprawdza czy tym razem place pasuje do filtru regex */
-        })
-  };
+    return place.city.match(regex);/*i sprawdza czy tym razem place pasuje do filtru regex */
+  });
+  }
 
 function getAdditionalData(cityName, cities) { //pobierz dodatkowe dane po wyborze miasta
   cities.forEach(function(town) {
@@ -64,7 +64,7 @@ function displayAdditionalData(e) { //wyświetla dodatkowe informacje po wskazan
           zoom: 9,
           center: setting
         });
-      };
+      }
 
 
 const searchInput = document.querySelector('#search');
