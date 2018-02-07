@@ -18,9 +18,9 @@
 <body>
   <header>
     <div id="top">
-      <h1 id="logo">LOGO</h1>
+      <h1 id="logo" data-toggle="tooltip" title="To jest wypasione LOGO!" data-placement="bottom">LOGO</h1>
       <div id="inside"><p>Let's go!</p></div>
-      <input id="search" type="text" placeholder="search...">
+      <input id="search" type="text" placeholder="wpisz miasto" data-toggle="tooltip" title="Tutaj wpisz nazwę miasta w USA" data-placement="bottom">
     </div>
   </header>
 
@@ -39,10 +39,15 @@
         <div id="populacja"></div>
       </div>
     </div>
+    <div class="row">
+      <div id="map"></div>
   </div>
 
-  <footer class="text-center container-fluid">
-    <p>© Marcin Górecki 2018</p>
+  <footer class="text-center container">
+    <p id="name" data-toggle="tooltip" title="To ja, oczywiście ;)" data-placement="top">© Marcin Górecki 2018</p>
   </footer>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDL1ErNloZs0Zj4C0zBNKgaiR7kllwYens"></script>
   <script src="scripts.js"></script>
+  </script>
+
 </body>

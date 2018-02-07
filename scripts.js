@@ -1,4 +1,4 @@
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';// tutaj są dane w formacie json - zewntrzne źródło
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';// tutaj są dane w formacie json - zewntrzne źródło (ktoś serio wstawił na github dane 1000 misat w USA!)
 
 const cities = [];
 fetch(endpoint) // pobiera dane z adresu
@@ -14,12 +14,14 @@ function findMatches(wordToMatch, cities) { //funkcja pobiera to co wprowadził 
         })
   };
 
-function getAdditionalData(cityName, cities) {
+function getAdditionalData(cityName, cities) { //pobierz dodatkowe dane po wyborze miasta
   cities.forEach(function(town) {
     if (town.city == cityName) {
       state = town.state;
       population = town.population;
-      return {state, population};
+      latitude = town.latitude;
+      longitude = town.longitude;
+      return {state, population, latitude, longitude};
     }
   });
 }
@@ -36,8 +38,8 @@ function displayMatches () { //wyświetla wyniki wyszukiwania
   miasto.innerHTML = html;
 }
 
-function displayAdditionalData(e) {
-  let cityName = e.srcElement.innerText;
+function displayAdditionalData(e) { //wyświetla dodatkowe informacje po wskazaniu miasta
+  cityName = e.srcElement.innerText; //tutaj ukryła sie nazwa miasta
   const additionalData = getAdditionalData(cityName, cities);
   stan.innerHTML = `
   <p>
@@ -54,7 +56,16 @@ function displayAdditionalData(e) {
   <span class="name">${cityName}</span>
   </p>
   `;
+  initMap(); //wywołaj mapy google
 }
+    function initMap() {
+        var setting = {lat: parseFloat(`${latitude}`), lng: parseFloat(`${longitude}`)};//dane geolokacyjne ze sparsowanych zmiennych
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 9,
+          center: setting
+        });
+      };
+
 
 const searchInput = document.querySelector('#search');
 const miasto = document.querySelector('#miasto');
@@ -62,3 +73,12 @@ const stan = document.querySelector('#stan');
 const populacja = document.querySelector('#populacja');
 searchInput.addEventListener('keyup', displayMatches);
 miasto.addEventListener('click', displayAdditionalData);
+//AIzaSyDL1ErNloZs0Zj4C0zBNKgaiR7kllwYens
+
+//Odrobina jQuery ;)
+
+$(document).ready(function(){
+  $('#logo').tooltip();
+  $('#search').tooltip();
+  $('#name').tooltip();
+});
