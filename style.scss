@@ -96,7 +96,7 @@ header {
     @keyframes fade-in-color {
       0% {color:#39000A;}
       70%{color:#D3D3D3;}
-      100%{color:darkgreen;}
+      100%{color:green;}
     }
   }
 }
@@ -190,6 +190,8 @@ background-color: #39000A;
 }
 footer {
   color:#000;
+  text-shadow: 0 0 2px #fff;
+  font-weight: bold;
   font-size: 1.5em;
   margin-top: 30px;
 }
