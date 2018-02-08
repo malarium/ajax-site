@@ -1,4 +1,4 @@
-const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';// tutaj są dane w formacie json - zewntrzne źródło (ktoś serio wstawił na github dane 1000 misat w USA!)
+const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';// tutaj są dane w formacie json - zewntrzne źródło (ktoś wstawił na github dane 1000 misat w USA!)
 
 const cities = [];
 fetch(endpoint) // pobiera dane z adresu
@@ -8,6 +8,13 @@ fetch(endpoint) // pobiera dane z adresu
 
 
 function findMatches(wordToMatch, cities) { //funkcja pobiera to co wprowadził user i całą kolekcj w zmiennej cities
+  if(wordToMatch === "") {
+    miasto.innerHTML = "";
+    stan.innerHTML = "";
+    populacja.innerHTML = "";
+    initMap(3);
+    return;
+  }
   return cities.filter(place => { //filtruje przez wszystkie obiekty w cities i każdy przypisuje do zmiennej place
     const regex = new RegExp(wordToMatch, 'gi');//global, insensitive
     return place.city.match(regex);/*i sprawdza czy tym razem place pasuje do filtru regex */
@@ -16,7 +23,7 @@ function findMatches(wordToMatch, cities) { //funkcja pobiera to co wprowadził 
 
 function getAdditionalData(cityName, cities) { //pobierz dodatkowe dane po wyborze miasta
   cities.forEach(function(town) {
-    if (town.city == cityName) {
+    if (town.city === cityName) {
       state = town.state;
       population = town.population;
       latitude = town.latitude;
@@ -39,7 +46,7 @@ function displayMatches () { //wyświetla wyniki wyszukiwania
 }
 
 function displayAdditionalData(e) { //wyświetla dodatkowe informacje po wskazaniu miasta
-  cityName = e.srcElement.innerText; //tutaj ukryła sie nazwa miasta
+  cityName = e.target.innerText||e.srcElement.innerText; //tutaj ukryła sie nazwa miasta !!!Uwaga! Musi być taka kolejność, bo Firefox wyrzuci błąd i zatrzyma skrypt (!) Pierwsza wartość jest pobierana dla Firefoxa, druga - dla Chrome, Opery i Edge.
   const additionalData = getAdditionalData(cityName, cities);
   stan.innerHTML = `
   <p>
@@ -56,16 +63,15 @@ function displayAdditionalData(e) { //wyświetla dodatkowe informacje po wskazan
   <span class="name">${cityName}</span>
   </p>
   `;
-  initMap(); //wywołaj mapy google
+  initMap(10); //wywołaj mapy google
 }
-    function initMap() {
+    function initMap(zoom) {
         var setting = {lat: parseFloat(`${latitude}`), lng: parseFloat(`${longitude}`)};//dane geolokacyjne ze sparsowanych zmiennych
         var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 9,
+          zoom: parseFloat(`${zoom}`),
           center: setting
         });
       }
-
 
 const searchInput = document.querySelector('#search');
 const miasto = document.querySelector('#miasto');
@@ -76,9 +82,9 @@ miasto.addEventListener('click', displayAdditionalData);
 //AIzaSyDL1ErNloZs0Zj4C0zBNKgaiR7kllwYens
 
 //Odrobina jQuery ;)
-
 $(document).ready(function(){
   $('#logo').tooltip();
   $('#search').tooltip();
   $('#name').tooltip();
+  $('.category').tooltip();
 });

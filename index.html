@@ -11,6 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700" rel="stylesheet">
   <link rel="icon" href="images/ico_small.jpg" type="image/x-icon"/>
   <link rel="stylesheet" href="style.css"/>
   <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet"/>
@@ -18,24 +19,24 @@
 <body>
   <header>
     <div id="top">
-      <h1 id="logo" data-toggle="tooltip" title="To jest wypasione LOGO!" data-placement="bottom">LOGO</h1>
+      <h1 id="logo" data-toggle="tooltip" title="To jest wypasione LOGO!" data-placement="bottom">e<span>X</span>perience</h1>
       <div id="inside"><p>Let's go!</p></div>
       <input id="search" type="text" placeholder="wpisz miasto" data-toggle="tooltip" title="Tutaj wpisz nazwę miasta w USA" data-placement="bottom">
     </div>
   </header>
 
   <div class="container-fluid">
-    <div class="row text-center jumbotron">
+    <div class="row text-center" id="center-part">
       <div class="col-xs-12 col-sm-4 col-lg-4 result-box">
-        <h1>Miasto</h1>
+        <p class="category" data-toggle="tooltip" title="Zaznacz wybrane miasto" data-placement="top">MIASTO</p>
         <div id="miasto"></div>
       </div>
       <div class="col-xs-12 col-sm-4 col-lg-4 result-box">
-        <h1>Stan</h1>
+        <p class="category" data-toggle="tooltip" title="Stan, w którym znajduje się miasto" data-placement="top">STAN</p>
         <div id="stan"></div>
       </div>
       <div class="col-xs-12 col-sm-4 col-lg-4 result-box">
-        <h1>Populacja</h1>
+        <p class="category" data-toggle="tooltip" title="Populacja miasta" data-placement="top">POPULACJA</p>
         <div id="populacja"></div>
       </div>
     </div>
